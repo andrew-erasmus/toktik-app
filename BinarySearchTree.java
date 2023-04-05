@@ -90,5 +90,4 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
       else
          return node.right;
    }
-   
 }
