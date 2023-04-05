@@ -4,6 +4,5 @@ public class Main {
         System.out.println();
         User myUser = new User("","");
         System.out.println(myUser);
-        
     }
 }
