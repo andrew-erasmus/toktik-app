@@ -2,7 +2,8 @@
 public class User implements Comparable<User>{
     private String accName;
     private String desc;
-    // add stack of posts
+    private PostList posts = new PostList();
+
     public User(String accName, String desc){
         this.accName = accName;
         this.desc = desc;
@@ -24,5 +25,11 @@ public class User implements Comparable<User>{
         
         return this.accName.compareTo(other.getUsername());
     }
+
+    public void addPost(Post addP){
+        posts.addToStart(addP);
+    }
+
+    // add functions for post manipulation
    
 }

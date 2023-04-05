@@ -21,6 +21,15 @@ public class Post {
         return numLikes;
     }
 
+    public boolean equals(Post other){
+
+        if((this.title.equals(other.getTitle())) && (this.fileName.equals(other.getFName())) && (this.numLikes == (other.getLikes())) ){
+            return true;
+        }
+        return false;
+
+    }
+
     public String toString(){
         String output="Title: "+title+"\nFile Name: "+fileName+"\nLikes: "+numLikes;
         return output;
