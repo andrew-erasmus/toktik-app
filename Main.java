@@ -32,64 +32,79 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Enter the account name: ");
+                    System.out.print("Enter the account name: ");
                     String targetName = input.next();
-                    // add logic to find a User object in the tree based off the name
+                    input.nextLine();
                     // create a target object with the same name and have it return a node with the correct user object
                     User temp = new User(targetName, "");
                     BinaryTreeNode<User> found = bst.find(temp);
-                    System.out.println("Profile Desription: "+found.data.getDesc()+"\n");
+                    System.out.println("\nProfile Desription: "+found.data.getDesc()+"\n");
                     break;
 
                 case 2:
-                    System.out.println("\n-- Accounts --");
+                    System.out.println("\n-- Accounts --\n");
                     bst.inOrder();
                     break;
 
                 case 3:
-                    System.out.println("\n-- Create New Account --");
+                    System.out.println("\n-- Create New Account --\n");
                     System.out.print("Enter an account name: ");
                     String accName = input.next();
+                    input.nextLine();
                     System.out.print("Enter an account description: ");
-                    String desc= input.next();
+                    String desc= input.nextLine();
 
                     User inAcc = new User(accName, desc);
                     // write logic so that the account does not exist already
 
                     bst.insert(inAcc);
-                    System.out.println("-- New Account Created --");
+                    System.out.println("\n-- New Account Created --\n");
                     break;
 
                 case 4:
                 
-                    System.out.println("\n-- Delete Account --");
-                    System.out.println("Enter account name to delete: ");
-                    String deleteName= input.nextLine();
-                    // add logic to delete based on the account name
+                    System.out.println("\n-- Delete Account --\n");
+                    System.out.print("Enter account to delete: ");
+                    String deleteName= input.next();
+                    input.nextLine();
+                    User deleteUser = new User(deleteName, "");
+                    bst.delete(deleteUser);
+                    System.out.println("\n-- Account Deleted --\n");
                     break;
 
                 case 5:
-                    System.out.println("\n-- Posts --");
-
+                    System.out.println("\n-- Posts --\n");
+                    System.out.print("Enter the account name: ");
+                    String postsName = input.next();
+                    input.nextLine();
+                    // create a target object with the same name and have it return a node with the correct user object
+                    User target = new User(postsName, "");
+                    BinaryTreeNode<User> foundForPosts = bst.find(target);
+                    foundForPosts.data.getPosts();
 
                     break;
-                    // add logic to find a User object in the tree based off the name
+                    
                 case 6:
-                    System.out.println("\n-- New Post --");
-                    System.out.println("Enter the account to add a post to: ");
-                    String postAcc = input.nextLine();
+                    System.out.println("\n-- New Post --\n");
+                    System.out.print("Enter the account to add a post to: ");
+                    String postAcc = input.next();
+                    input.nextLine();
+
+                    User poster = new User(postAcc, "");
+                    BinaryTreeNode<User> toPost = bst.find(poster);
+
                     // find the post account and then add to it
-                    System.out.println("Title: ");
+                    System.out.print("Title: ");
                     String postTitle = input.nextLine();
-                    System.out.println("File name: ");
+                    System.out.print("File name: ");
                     String fileName = input.nextLine();
                     System.out.println("Number of likes: ");
                     int numLikes = input.nextInt();
                     Post inPost = new Post(postTitle,fileName,numLikes); 
 
-                    //postAcc.addPost(inPost);
+                    toPost.data.addPost(inPost);
                     break;
-                    // add logic to find a User object in the tree based off the name
+                    
                 case 7:
                     System.out.println("Enter disk action");
                     //create logic to add accounts from file for add and remove
