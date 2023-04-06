@@ -11,6 +11,7 @@ public class Main {
         //Understand the 7th option
         //Do a makefile
         //Make a simple GUI
+        //Watch out if inputs have an extra "\n"
 
         BinarySearchTree<User> bst = new BinarySearchTree<User>();
         Scanner input = new Scanner(System.in);
@@ -26,13 +27,18 @@ public class Main {
         menu += "\n8. Quit\nEnter your choice: ";
 
         while (choice != 8) {
-            System.out.println(menu);
+            System.out.print(menu);
             choice = input.nextInt();
 
             switch (choice) {
                 case 1:
                     System.out.println("Enter the account name: ");
+                    String targetName = input.next();
                     // add logic to find a User object in the tree based off the name
+                    // create a target object with the same name and have it return a node with the correct user object
+                    User temp = new User(targetName, "");
+                    BinaryTreeNode<User> found = bst.find(temp);
+                    System.out.println("Profile Desription: "+found.data.getDesc()+"\n");
                     break;
 
                 case 2:
@@ -42,10 +48,10 @@ public class Main {
 
                 case 3:
                     System.out.println("\n-- Create New Account --");
-                    System.out.println("Enter an account name: ");
-                    String accName = input.nextLine();
-                    System.out.println("Enter an account description: ");
-                    String desc= input.nextLine();
+                    System.out.print("Enter an account name: ");
+                    String accName = input.next();
+                    System.out.print("Enter an account description: ");
+                    String desc= input.next();
 
                     User inAcc = new User(accName, desc);
                     // write logic so that the account does not exist already
@@ -64,7 +70,7 @@ public class Main {
 
                 case 5:
                     System.out.println("\n-- Posts --");
-                    
+
 
                     break;
                     // add logic to find a User object in the tree based off the name
