@@ -3,19 +3,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        // User andrew = new User("andrewOnTok", "I make fun videos");
-        // User bella = new User("bellasTok", "I make art videos");
-        // User hayden = new User("haydennn", "I make car videos");
-
-        //
-
-        // bst.insert(bella);
-        // bst.insert(andrew);
-        // bst.insert(hayden);
-
-        // bst.preOrder();
-
+        //DO TO
+        // Add an override to the Binary Tree so that can find a user based on their name
         //Add logic for error handling
+        //// write logic so that the account does not exist already -- Possibly an exists class in the tree (recursive one)
+        //add logic to delete based on the account name
+        //Understand the 7th option
+        //Do a makefile
+        //Make a simple GUI
+
         BinarySearchTree<User> bst = new BinarySearchTree<User>();
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -41,6 +37,7 @@ public class Main {
 
                 case 2:
                     System.out.println("\n-- Accounts --");
+                    bst.inOrder();
                     break;
 
                 case 3:
@@ -67,7 +64,7 @@ public class Main {
 
                 case 5:
                     System.out.println("\n-- Posts --");
-                   
+                    
 
                     break;
                     // add logic to find a User object in the tree based off the name
@@ -75,6 +72,7 @@ public class Main {
                     System.out.println("\n-- New Post --");
                     System.out.println("Enter the account to add a post to: ");
                     String postAcc = input.nextLine();
+                    // find the post account and then add to it
                     System.out.println("Title: ");
                     String postTitle = input.nextLine();
                     System.out.println("File name: ");
@@ -92,6 +90,7 @@ public class Main {
                     break;
                 case 8:
                     System.out.println("-- Goodbye! --");
+                    input.close();
                     break;
                 default:
                     System.out.println("Please select a valid option (1-8)");

@@ -18,7 +18,7 @@ public class User implements Comparable<User>{
     }
 
     public String toString(){
-        return "Account name: "+accName+"\nDescription: "+desc;
+        return "Account name: "+accName+"\nDescription: "+desc+"\n";
     }
 
     public int compareTo(User other){
