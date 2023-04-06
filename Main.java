@@ -4,10 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         //DO TO
-        // Add an override to the Binary Tree so that can find a user based on their name
         //Add logic for error handling
-        //// write logic so that the account does not exist already -- Possibly an exists class in the tree (recursive one)
-        //add logic to delete based on the account name
         //Understand the 7th option
         //Do a makefile
         //Make a simple GUI
@@ -48,17 +45,24 @@ public class Main {
 
                 case 3:
                     System.out.println("\n-- Create New Account --\n");
-                    System.out.print("Enter an account name: ");
-                    String accName = input.next();
-                    input.nextLine();
-                    System.out.print("Enter an account description: ");
-                    String desc= input.nextLine();
+                    BinaryTreeNode<User> exists;
+                    do{
+                        System.out.print("Enter an account name: ");
+                        String accName = input.next();
+                        input.nextLine();
+                        System.out.print("Enter an account description: ");
+                        String desc= input.nextLine();
 
-                    User inAcc = new User(accName, desc);
-                    // write logic so that the account does not exist already
-
-                    bst.insert(inAcc);
-                    System.out.println("\n-- New Account Created --\n");
+                        User inAcc = new User(accName, desc);
+                        exists=bst.find(inAcc);
+                        
+                        if(exists!=null){
+                            System.out.println("Account name already exists, please try again");
+                        }else{
+                            bst.insert(inAcc);
+                            System.out.println("\n-- New Account Created --\n");
+                        }
+                    }while(exists!=null);           
                     break;
 
                 case 4:
