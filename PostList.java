@@ -1,4 +1,4 @@
-// Stack linked data structure for the user's posts
+// Linked list structure for the user's posts
 // 2023/04/05
 // Andrew Erasmus
 
@@ -46,7 +46,7 @@ public class PostList{
 
     }
 
-    public void outputPost()
+    public void outputPosts()
    {
       Node position = head;
       while (position != null)
@@ -58,14 +58,6 @@ public class PostList{
 
    // Add functionality to find a post with a specific title 
    // Add method to remove post based on title and filename (can have the same title)
-
-    //
-    /*public String pop(){
-        String rvMsg = "-- Post removed --\n" + head.getPost().getTitle();
-        head.setLink(null);
-        return rvMsg;
-        
-    }*/
 
     //Possibly add a find method to display a post
 

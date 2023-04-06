@@ -30,6 +30,10 @@ public class User implements Comparable<User>{
         posts.addToStart(addP);
     }
 
-    // add functions for post manipulation
+    public void getPosts(){
+        posts.outputPosts();
+    }
+
+    
    
 }
