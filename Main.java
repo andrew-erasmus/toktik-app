@@ -35,6 +35,9 @@ public class Main {
                     // create a target object with the same name and have it return a node with the correct user object
                     User temp = new User(targetName, "");
                     BinaryTreeNode<User> found = bst.find(temp);
+                    if(found == null){
+                        System.out.println("-- Account entered does not exist --");
+                    }
                     System.out.println("\nProfile Desription: "+found.data.getDesc()+"\n");
                     break;
 
@@ -66,14 +69,24 @@ public class Main {
                     break;
 
                 case 4:
-                
                     System.out.println("\n-- Delete Account --\n");
-                    System.out.print("Enter account to delete: ");
-                    String deleteName= input.next();
-                    input.nextLine();
-                    User deleteUser = new User(deleteName, "");
-                    bst.delete(deleteUser);
-                    System.out.println("\n-- Account Deleted --\n");
+                    BinaryTreeNode<User> foundToDelete;
+                    do{
+                        System.out.print("Enter account to delete: ");
+                        String deleteName= input.next();
+                        input.nextLine();
+                        
+
+                        User deleteUser = new User(deleteName, "");
+                        foundToDelete=bst.find(deleteUser);
+                        
+                        if(foundToDelete==null){
+                            System.out.println("Account name does not exist, please try again\n");
+                        }else{
+                            bst.delete(deleteUser);
+                            System.out.println("\n-- Account Deleted --\n");
+                        }
+                    }while(foundToDelete==null);                    
                     break;
 
                 case 5:
@@ -118,7 +131,7 @@ public class Main {
                     input.close();
                     break;
                 default:
-                    System.out.println("Please select a valid option (1-8)");
+                    System.out.println("\n-- Please select a valid option (1-8) --\n");
                     break;
 
             }
