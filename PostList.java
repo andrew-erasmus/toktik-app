@@ -32,7 +32,7 @@ public class PostList{
         }
     
         public String toString() {
-            return "Node: " + p.getTitle();
+            return p.toString()+"\n";
         }
     }
     public PostList(){
