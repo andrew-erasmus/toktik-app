@@ -63,6 +63,13 @@ public class User implements Comparable<User>{
         posts.outputPosts();
     }
 
+    public void findPost(){
+
+    }
+
+    public void deletePost(){
+        
+    }
     
    
 }

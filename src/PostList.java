@@ -92,6 +92,13 @@ public class PostList {
         }
     }
 
+    public void findPost(String title, String fileName){
+        Node position = head;
+    }
+
+    public void removePost(){
+
+    }
     // Add functionality to find a post with a specific title
     // Add method to remove post based on title and filename (can have the same
     // title)

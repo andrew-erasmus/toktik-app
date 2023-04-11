@@ -1,4 +1,3 @@
-
 // Andrew Erasmus
 // 11/04/2023
 // Main page for the backend of a simple tik tok clone
