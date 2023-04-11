@@ -1,7 +1,13 @@
+// Andrew Erasmus
+// 11/04/2023
+// Main page for the backend of a simple tik tok clone
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * 
+ */
 public class Main {
 
     static BinarySearchTree<User> bst = new BinarySearchTree<User>();
@@ -81,6 +87,10 @@ public class Main {
 
     }
 
+    /**
+     * 
+     * @param targetName
+     */
     public static void findDesc(String targetName) {
         User temp = new User(targetName, "");
         BinaryTreeNode<User> found = bst.find(temp);
@@ -90,6 +100,9 @@ public class Main {
         System.out.println("\nProfile Desription: " + found.data.getDesc() + "\n");
     }
 
+    /**
+     * 
+     */
     public static void createAccount() {
         BinaryTreeNode<User> exists;
         do {
@@ -111,15 +124,22 @@ public class Main {
         } while (exists != null);
     }
 
+    /**
+     * 
+     * @param accName
+     * @param desc
+     */
     public static void createAccount(String accName, String desc) {
         BinaryTreeNode<User> exists;
         User inAcc = new User(accName, desc);
         exists = bst.find(inAcc);
         bst.insert(inAcc);
-        //System.out.println("\n-- New Account Created --\n");
 
     }
 
+    /**
+     * 
+     */
     public static void deleteAccount() {
         BinaryTreeNode<User> foundToDelete;
         do {
@@ -139,6 +159,9 @@ public class Main {
         } while (foundToDelete == null);
     }
 
+    /**
+     * 
+     */
     public static void displayPosts() {
         System.out.print("Enter the account name: ");
         String postsName = input.next();
@@ -150,6 +173,9 @@ public class Main {
         foundForPosts.data.getPosts();
     }
 
+    /**
+     * 
+     */
     public static void addPosts() {
         System.out.print("Enter the account to add a post to: ");
         String postAcc = input.next();
@@ -169,6 +195,13 @@ public class Main {
 
         toPost.data.addPost(inPost);
     }
+    /**
+     * 
+     * @param postAcc
+     * @param postTitle
+     * @param numLikes
+     * @param fileName
+     */
     public static void addPosts(String postAcc, String postTitle, int numLikes, String fileName) {
         User poster = new User(postAcc, "");
         BinaryTreeNode<User> toPost = bst.find(poster);
@@ -178,6 +211,9 @@ public class Main {
         toPost.data.addPost(inPost);
     }
 
+    /**
+     * 
+     */
     public static void loadFileActions() {
         // create logic to add accounts from file for add and remove
         Scanner fileIn = null;
