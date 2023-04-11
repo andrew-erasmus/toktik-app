@@ -1,19 +1,26 @@
-# binary search program makefile
-# Hussein Suleman
-# 27 March 2017
+# TokTik program makefile
+# Andrew Erasmus
+# 11/04/2023
 
-JAVAC=/usr/bin/javac
+JAVAC=./bin/javac
+JAVA=./bin/java
 
 .SUFFIXES: .java .class
+SRCDIR=src 
+BINDIR=bin
 
-.java.class:
-	$(JAVAC) $<
+$(BINDIR)/%.class:$(SRCDIR)/%.java
+	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
-classes: BinaryTreeNode.class BinaryTree.class \
-         BTQueueNode.class BTQueue.class \
-         BinarySearchTree.class BinarySearchTreeTest.class
+CLASSES: BTQueueNode.class BTQueue.class BinaryTreeNode.class BinaryTree.class \
+         BinarySearchTree.class BinarySearchTreeTest.class \
+		 Post.class PostList.class User.class Main.class  
 
-default: $(CLASSES)
-
+CLASS_FILES=$(classes:%.class=$(BINDIR)/%.class)
+default: $(CLASS_FILES)
+	
 clean:
-	rm *.class
+	rm $(BINDIR)/*.class
+
+run: $(CLASS_FILES)
+	java -cp bin Main
