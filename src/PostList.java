@@ -94,12 +94,19 @@ public class PostList {
 
     public void findPost(String title, String fileName){
         Node position = head;
+        while (position != null){
+            if((position.getPost().getTitle().equals(title)) && (!position.getPost().getFName().equals(fileName))){
+                System.out.println("\n--Result--\n");
+                System.out.println(position.getPost().toString());
+                return;
+            }
+            position = position.getLink();
+        }
+
+        System.out.println("\n--Post does not exist--\n");
+
     }
 
-    public void removePost(){
-
-    }
-    // Add functionality to find a post with a specific title
     // Add method to remove post based on title and filename (can have the same
     // title)
 
