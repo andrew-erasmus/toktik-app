@@ -1,3 +1,4 @@
+
 // Andrew Erasmus
 // 11/04/2023
 // Main page for the backend of a simple tik tok clone
@@ -6,7 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
- * 
+ * This method runs the main operations of the application where the user can
+ * select options to manipulate data in a certain way
  */
 public class Main {
 
@@ -17,11 +19,10 @@ public class Main {
 
         // DO TO
         // Add logic for error handling
-        // Understand the 7th option
         // Do a makefile
-        // Make a simple GUI
-        // Watch out if inputs have an extra "\n"
-        // fix error handling for 1
+        // Make a simple GUI, or a follow and follow back feature, delete posts, search
+        // for posts
+
         int choice = 0;
         String menu = "Choose an action from the menu: (Choose 1-8)";
         menu += "\n1. Find the profile description for a given account";
@@ -71,7 +72,7 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("Enter disk action");
+                    System.out.println("\n --Actions loaded from disk-- \n");
                     loadFileActions();
                     break;
                 case 8:
@@ -95,9 +96,11 @@ public class Main {
         User temp = new User(targetName, "");
         BinaryTreeNode<User> found = bst.find(temp);
         if (found == null) {
-            System.out.println("-- Account entered does not exist --");
+            System.out.println("\n-- Account entered does not exist --\n");
+        }else{
+            System.out.println("\nProfile Desription: " + found.data.getDesc() + "\n");
         }
-        System.out.println("\nProfile Desription: " + found.data.getDesc() + "\n");
+       
     }
 
     /**
@@ -151,7 +154,7 @@ public class Main {
             foundToDelete = bst.find(deleteUser);
 
             if (foundToDelete == null) {
-                System.out.println("Account name does not exist, please try again\n");
+                System.out.println("\n-- Account name does not exist, please try again --\n");
             } else {
                 bst.delete(deleteUser);
                 System.out.println("\n-- Account Deleted --\n");
@@ -170,7 +173,12 @@ public class Main {
         // correct user object
         User target = new User(postsName, "");
         BinaryTreeNode<User> foundForPosts = bst.find(target);
-        foundForPosts.data.getPosts();
+        if (foundForPosts == null) {
+            System.out.println("\n-- Account cannot be found --\n");
+        } else {
+            foundForPosts.data.getPosts();
+        }
+
     }
 
     /**
@@ -184,17 +192,23 @@ public class Main {
         User poster = new User(postAcc, "");
         BinaryTreeNode<User> toPost = bst.find(poster);
 
-        // find the post account and then add to it
-        System.out.print("Title: ");
-        String postTitle = input.nextLine();
-        System.out.print("File name: ");
-        String fileName = input.nextLine();
-        System.out.println("Number of likes: ");
-        int numLikes = input.nextInt();
-        Post inPost = new Post(postTitle, fileName, numLikes);
+        if (toPost != null) {
+            System.out.print("Title: ");
+            String postTitle = input.nextLine();
+            System.out.print("File name: ");
+            String fileName = input.nextLine();
+            System.out.println("Number of likes: ");
+            int numLikes = input.nextInt();
+            Post inPost = new Post(postTitle, fileName, numLikes);
 
-        toPost.data.addPost(inPost);
+            toPost.data.addPost(inPost);
+        } else {
+            System.out.println("\n-- Account cannot be found, cannot make a post --\n");
+        }
+        
+
     }
+
     /**
      * 
      * @param postAcc
@@ -213,6 +227,7 @@ public class Main {
 
     /**
      * 
+     * @throws e
      */
     public static void loadFileActions() {
         // create logic to add accounts from file for add and remove
@@ -226,16 +241,19 @@ public class Main {
 
                 if (splitLine[0].equalsIgnoreCase("Create")) {
                     int createLength = splitLine[0].length();
-                    int nameLength=splitLine[1].length();
+                    int nameLength = splitLine[1].length();
                     int spaces = 2;
-                    createAccount(splitLine[1],line.substring(nameLength+createLength+spaces,line.length()));
+                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length()));
                 } else {
                     int addLength = splitLine[0].length();
-                    int nameLength=splitLine[1].length();
+                    int nameLength = splitLine[1].length();
                     int fileNameLength = splitLine[2].length();
                     int numLikesLength = splitLine[3].length();
                     int spaces = 4;
-                    addPosts(splitLine[1],line.substring(addLength+nameLength+fileNameLength+numLikesLength+spaces,line.length()), Integer.parseInt(splitLine[3]), splitLine[2]);
+                    addPosts(splitLine[1],
+                            line.substring(addLength + nameLength + fileNameLength + numLikesLength + spaces,
+                                    line.length()),
+                            Integer.parseInt(splitLine[3]), splitLine[2]);
                 }
 
             }
