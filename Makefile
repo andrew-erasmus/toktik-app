@@ -12,9 +12,9 @@ BINDIR=bin
 $(BINDIR)/%.class:$(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
-CLASSES: BTQueueNode.class BTQueue.class BinaryTreeNode.class BinaryTree.class \
-         BinarySearchTree.class BinarySearchTreeTest.class \
-		 Post.class PostList.class User.class Main.class  
+CLASSES: $(BINDIR)/BTQueueNode.class $(BINDIR)/BTQueue.class $(BINDIR)/BinaryTreeNode.class $(BINDIR)/BinaryTree.class \
+         $(BINDIR)/BinarySearchTree.class $(BINDIR)/BinarySearchTreeTest.class \
+         $(BINDIR)/Post.class $(BINDIR)/PostList.class $(BINDIR)/User.class $(BINDIR)/Main.class 
 
 CLASS_FILES=$(classes:%.class=$(BINDIR)/%.class)
 default: $(CLASS_FILES)
