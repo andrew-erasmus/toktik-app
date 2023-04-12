@@ -65,4 +65,8 @@ public class Post {
         String output="Title: "+title+"\nFile Name: "+fileName+"\nLikes: "+numLikes;
         return output;
     }
+
+    // add method to change title of a post
+
+    ///
 }

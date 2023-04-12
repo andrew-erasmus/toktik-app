@@ -6,7 +6,7 @@ public class PostList {
     private Node head;
 
     /**
-     * 
+     * Inner class
      */
     private class Node {
         private Post p;
@@ -107,8 +107,7 @@ public class PostList {
 
     }
 
-    // Add method to remove post
-    // based on title and filename (can have the same
-    // title)
+    // Add method to remove post -- possibly iterator
 
 }
+
