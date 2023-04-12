@@ -8,10 +8,10 @@ public class Post {
     private int numLikes;
     
     /**
-     * 
-     * @param inTitle
-     * @param inFileName
-     * @param inNumLikes
+     * Constructor to make a post based off the information parsed in
+     * @param inTitle The title of the post
+     * @param inFileName The filename of the post
+     * @param inNumLikes The number of likes that the post has
      */
     public Post(String inTitle, String inFileName, int inNumLikes){
         title = inTitle;
@@ -20,33 +20,34 @@ public class Post {
     }
 
     /**
-     * 
-     * @return
+     * Method to get the title of the post
+     * @return the title string of the post 
      */
     public String getTitle(){
         return title;
     }
 
     /**
-     * 
-     * @return
+     * Accesses the filename of the post object
+     * @return the filename string of the post
      */
     public String getFName(){
         return fileName;
     }
 
     /**
-     * 
-     * @return
+     * Accesses the number of likes that the post has
+     * @return the integer number of likes that a post
      */
     public int getLikes(){
         return numLikes;
     }
 
     /**
-     * 
-     * @param other
-     * @return
+     * Method to compare two post objects to see if they are the same based off of the title and filename
+     * The title and filename of the post is unique so can be used to compare the posts
+     * @param other the other post object that is being compaired
+     * @return returns whether they are the same object or not
      */
     public boolean equals(Post other){
 
@@ -58,7 +59,7 @@ public class Post {
     }
 
     /**
-     * 
+     * Outputs the Post in a presentable manner
      */
     public String toString(){
         String output="Title: "+title+"\nFile Name: "+fileName+"\nLikes: "+numLikes;

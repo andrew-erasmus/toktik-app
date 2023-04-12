@@ -20,6 +20,7 @@ public class Main {
         // Do a makefile
         // Make a simple GUI, or a follow and follow back feature, delete posts, search
         // Error handling to go back
+        // Error handling if enter a string for the choice
 
         int choice = 0;
         // actions for the user to select from
@@ -111,7 +112,7 @@ public class Main {
     /**
      * Method to create an account with an inputted name and description
      * If the name of the user already exists, it will make the user try again until they 
-     * choose a unique name.
+     * choose a unique name if they so choose. 
      * 
      */
     public static void createAccount() {
@@ -128,7 +129,7 @@ public class Main {
 
             if (exists != null) {
                 System.out.println("Account name already exists, please try again");
-                System.out.println("Do you want to continue? Y/N");
+                System.out.println("Do you want to continue? Y/N"); // Allows them to quit if they don't want to continue
                 String cont = input.nextLine();
                 
                 if(cont.equals("Y") || cont.equals("y")){
@@ -159,6 +160,7 @@ public class Main {
 
     /**
      * Deletes an account based on the username that the user enters.
+     * If it is not found, the user can try again if they wish
      * 
      */
     public static void deleteAccount() {
@@ -168,7 +170,9 @@ public class Main {
             String deleteName = input.next();
             input.nextLine();
 
+            // Create a new user with the name to search for
             User deleteUser = new User(deleteName, "");
+            // See if an object with the same name can be found
             foundToDelete = bst.find(deleteUser);
 
             if (foundToDelete == null) {
@@ -189,7 +193,7 @@ public class Main {
     }
 
     /**
-     * 
+     * Displays all the posts for a single user if the account exists
      */
     public static void displayPosts() {
         System.out.print("Enter the account name: ");
@@ -208,7 +212,8 @@ public class Main {
     }
 
     /**
-     * 
+     * Asks the user to enter a title, filename and number of likes. 
+     * It then creates a post object and adds it to the linked list belonging to a user
      */
     public static void addPosts() {
         System.out.print("Enter the account to add a post to: ");
@@ -236,11 +241,11 @@ public class Main {
     }
 
     /**
-     * 
-     * @param postAcc
-     * @param postTitle
-     * @param numLikes
-     * @param fileName
+     * Adds posts to the account of a user based off the actions from a file
+     * @param postAcc The account to add the post to
+     * @param postTitle The title of the post to be added
+     * @param numLikes The number of likes for the post
+     * @param fileName The fileName of the post
      */
     public static void addPosts(String postAcc, String postTitle, int numLikes, String fileName) {
         User poster = new User(postAcc, "");
@@ -252,8 +257,8 @@ public class Main {
     }
 
     /**
-     * 
-     * @throws e
+     * Loads actions from an external file to create and add a file
+     * @throws e If the file cannot be found it throws this exception
      */
     public static void loadFileActions() {
         // create logic to add accounts from file for add and remove
@@ -266,20 +271,20 @@ public class Main {
                 String[] splitLine = line.split(" ");
 
                 if (splitLine[0].equalsIgnoreCase("Create")) {
-                    int createLength = splitLine[0].length();
-                    int nameLength = splitLine[1].length();
+                    int createLength = splitLine[0].length(); // length of the word "create"
+                    int nameLength = splitLine[1].length(); // length of the username
                     int spaces = 2;
-                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length()));
+                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length())); //substring for the description from after the word to the end of the line
                 } else {
-                    int addLength = splitLine[0].length();
-                    int nameLength = splitLine[1].length();
-                    int fileNameLength = splitLine[2].length();
-                    int numLikesLength = splitLine[3].length();
+                    int addLength = splitLine[0].length(); // length of the word "add"
+                    int nameLength = splitLine[1].length(); // length of the username
+                    int fileNameLength = splitLine[2].length(); // length of the filename
+                    int numLikesLength = splitLine[3].length(); // length of the number of likes as a string
                     int spaces = 4;
                     addPosts(splitLine[1],
                             line.substring(addLength + nameLength + fileNameLength + numLikesLength + spaces,
-                                    line.length()),
-                            Integer.parseInt(splitLine[3]), splitLine[2]);
+                                    line.length()), 
+                            Integer.parseInt(splitLine[3]), splitLine[2]); // adds the post with the respective files and uses substring to account for spaces
                 }
 
             }
@@ -289,6 +294,7 @@ public class Main {
             System.exit(0);
         }
     }
+
 
     public static void findPost(){
         
