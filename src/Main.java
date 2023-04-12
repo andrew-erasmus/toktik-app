@@ -19,8 +19,10 @@ public class Main {
         // DO TO
         // Do a makefile
         // Make a simple GUI, or a follow and follow back feature, delete posts, search
+        // Error handling to go back
 
         int choice = 0;
+        // actions for the user to select from
         String menu = "Choose an action from the menu: (Choose 1-8)";
         menu += "\n1. Find the profile description for a given account";
         menu += "\n2. List all accounts";
@@ -69,6 +71,7 @@ public class Main {
                     break;
 
                 case 7:
+                    // runs processes to do the actions in a file such as adding and deleting files
                     System.out.println("\n --Actions loaded from disk-- \n");
                     loadFileActions();
                     break;
@@ -77,6 +80,7 @@ public class Main {
                     input.close();
                     break;
                 default:
+                    // if the user does not enter a number from 1-8
                     System.out.println("\n-- Please select a valid option (1-8) --\n");
                     break;
 
@@ -86,8 +90,12 @@ public class Main {
     }
 
     /**
+     * Finds the description of a given account by passing in username to search in the
+     * tree and by outputting the description of it.
+     * If the username is not found in the binary tree then it will output that it 
+     * does not exist.
      * 
-     * @param targetName
+     * @param targetName The name of the user to search in the binary tree
      */
     public static void findDesc(String targetName) {
         User temp = new User(targetName, "");
@@ -101,6 +109,9 @@ public class Main {
     }
 
     /**
+     * Method to create an account with an inputted name and description
+     * If the name of the user already exists, it will make the user try again until they 
+     * choose a unique name.
      * 
      */
     public static void createAccount() {
@@ -117,6 +128,14 @@ public class Main {
 
             if (exists != null) {
                 System.out.println("Account name already exists, please try again");
+                System.out.println("Do you want to continue? Y/N");
+                String cont = input.nextLine();
+                
+                if(cont.equals("Y") || cont.equals("y")){
+                    continue;
+                }else{
+                    break;
+                }
             } else {
                 bst.insert(inAcc);
                 System.out.println("\n-- New Account Created --\n");
@@ -125,19 +144,21 @@ public class Main {
     }
 
     /**
+     * Method to create an account based on the actions loaded from a file.
      * 
-     * @param accName
-     * @param desc
+     * @param accName The name of the user to be added to the tree
+     * @param desc The description of the respective account entered
      */
     public static void createAccount(String accName, String desc) {
-        BinaryTreeNode<User> exists;
+        //BinaryTreeNode<User> exists;
         User inAcc = new User(accName, desc);
-        exists = bst.find(inAcc);
+        //exists = bst.find(inAcc);
         bst.insert(inAcc);
 
     }
 
     /**
+     * Deletes an account based on the username that the user enters.
      * 
      */
     public static void deleteAccount() {
@@ -152,6 +173,14 @@ public class Main {
 
             if (foundToDelete == null) {
                 System.out.println("\n-- Account name does not exist, please try again --\n");
+                System.out.println("Do you want to continue? Y/N");
+                String cont = input.nextLine();
+                
+                if(cont.equals("Y") || cont.equals("y")){
+                    continue;
+                }else{
+                    break;
+                }
             } else {
                 bst.delete(deleteUser);
                 System.out.println("\n-- Account Deleted --\n");
