@@ -17,10 +17,8 @@ public class Main {
     public static void main(String[] args) {
 
         // DO TO
-        // Add logic for error handling
         // Do a makefile
         // Make a simple GUI, or a follow and follow back feature, delete posts, search
-        // for posts
 
         int choice = 0;
         String menu = "Choose an action from the menu: (Choose 1-8)";

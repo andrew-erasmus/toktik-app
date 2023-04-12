@@ -107,7 +107,8 @@ public class PostList {
 
     }
 
-    // Add method to remove post based on title and filename (can have the same
+    // Add method to remove post
+    // based on title and filename (can have the same
     // title)
 
 }

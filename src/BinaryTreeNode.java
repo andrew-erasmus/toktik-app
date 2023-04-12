@@ -8,6 +8,12 @@ public class BinaryTreeNode<dataType>
    BinaryTreeNode<dataType> left;
    BinaryTreeNode<dataType> right;
    
+   /**
+    * 
+    * @param d
+    * @param l
+    * @param r
+    */
    public BinaryTreeNode ( dataType d, BinaryTreeNode<dataType> l, BinaryTreeNode<dataType> r )
    {
       data = d;
@@ -15,6 +21,14 @@ public class BinaryTreeNode<dataType>
       right = r;
    }
    
+   /**
+    * 
+    * @return
+    */
    BinaryTreeNode<dataType> getLeft () { return left; }
+   /**
+    * 
+    * @return
+    */
    BinaryTreeNode<dataType> getRight () { return right; }
 }

@@ -6,13 +6,20 @@ public class BTQueue<dataType>
 {   
    BTQueueNode<dataType> head;
    BTQueueNode<dataType> tail;
-      
+   
+   /**
+    * 
+    */
    public BTQueue ()
    {
       head = null;
       tail = null;
    }
    
+   /**
+    * 
+    * @return
+    */
    public BinaryTreeNode<dataType> getNext ()
    {
       if (head == null)
@@ -24,6 +31,10 @@ public class BTQueue<dataType>
       return qnode.node;
    }
    
+   /**
+    * 
+    * @param node
+    */
    public void enQueue ( BinaryTreeNode<dataType> node )
    {
       if (tail == null)

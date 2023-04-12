@@ -7,6 +7,11 @@ public class BTQueueNode<dataType>
    BinaryTreeNode<dataType> node;
    BTQueueNode<dataType> next;
    
+   /**
+    * 
+    * @param n
+    * @param nxt
+    */
    public BTQueueNode ( BinaryTreeNode<dataType> n, BTQueueNode<dataType> nxt )
    {
       node = n;

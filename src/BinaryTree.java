@@ -6,15 +6,27 @@ public class BinaryTree<dataType>
 {
    BinaryTreeNode<dataType> root;
    
+   /**
+    * 
+    */
    public BinaryTree ()
    {
       root = null;
    }
    
+   /**
+    * 
+    * @return
+    */
    public int getHeight ()
    {
       return getHeight (root);
-   }   
+   }  
+   /**
+    * 
+    * @param node
+    * @return
+    */ 
    public int getHeight ( BinaryTreeNode<dataType> node )
    {
       if (node == null)
@@ -22,11 +34,19 @@ public class BinaryTree<dataType>
       else
          return 1 + Math.max (getHeight (node.getLeft ()), getHeight (node.getRight ()));
    }
-   
+   /**
+    * 
+    * @return
+    */
    public int getSize ()
    {
       return getSize (root);
    }   
+   /**
+    * 
+    * @param node
+    * @return
+    */
    public int getSize ( BinaryTreeNode<dataType> node )
    {
       if (node == null)
@@ -34,16 +54,26 @@ public class BinaryTree<dataType>
       else
          return 1 + getSize (node.getLeft ()) + getSize (node.getRight ());
    }
-   
+   /**
+    * 
+    * @param node
+    */
    public void visit ( BinaryTreeNode<dataType> node )
    {
       System.out.println (node.data);
    }
    
+   /**
+    * 
+    */
    public void preOrder ()
    {
       preOrder (root);
    }
+   /**
+    * 
+    * @param node
+    */
    public void preOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -54,10 +84,17 @@ public class BinaryTree<dataType>
       }   
    }
 
+   /**
+    * 
+    */
    public void postOrder ()
    {
       postOrder (root);
    }
+   /**
+    * 
+    * @param node
+    */
    public void postOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -67,11 +104,17 @@ public class BinaryTree<dataType>
          visit (node);
       }   
    }
-
+   /**
+    * 
+    */
    public void inOrder ()
    {
       inOrder (root);
    }
+   /**
+    * 
+    * @param node
+    */
    public void inOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -81,7 +124,9 @@ public class BinaryTree<dataType>
          inOrder (node.getRight ());
       }   
    }
-
+   /**
+    * 
+    */
    public void levelOrder ()
    {
       if (root == null)

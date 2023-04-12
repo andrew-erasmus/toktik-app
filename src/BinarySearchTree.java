@@ -4,6 +4,10 @@
 
 public class BinarySearchTree<dataType extends Comparable<? super dataType>> extends BinaryTree<dataType>
 {
+   /**
+    * 
+    * @param d
+    */
    public void insert ( dataType d )
    {
       if (root == null)
@@ -11,6 +15,11 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
       else
          insert (d, root);
    }
+   /**
+    * 
+    * @param d
+    * @param node
+    */
    public void insert ( dataType d, BinaryTreeNode<dataType> node )
    {
       if (d.compareTo (node.data) <= 0)
@@ -28,7 +37,11 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
             insert (d, node.right);
       }
    }
-   
+   /**
+    * 
+    * @param d
+    * @return
+    */
    public BinaryTreeNode<dataType> find ( dataType d )
    {
       if (root == null)
@@ -36,6 +49,12 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
       else
          return find (d, root);
    }
+   /**
+    * 
+    * @param d
+    * @param node
+    * @return
+    */
    public BinaryTreeNode<dataType> find ( dataType d, BinaryTreeNode<dataType> node )
    {
       if (d.compareTo (node.data) == 0) 
@@ -45,11 +64,20 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
       else
          return (node.right == null) ? null : find (d, node.right);
    }
-   
+   /**
+    * 
+    * @param d
+    */
    public void delete ( dataType d )
    {
       root = delete (d, root);
-   }   
+   }
+   /**
+    * 
+    * @param d
+    * @param node
+    * @return
+    */   
    public BinaryTreeNode<dataType> delete ( dataType d, BinaryTreeNode<dataType> node )
    {
       if (node == null) return null;
@@ -69,7 +97,11 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
             node = node.right;
       return node;
    }
-   
+   /**
+    * 
+    * @param node
+    * @return
+    */
    public BinaryTreeNode<dataType> findMin ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -77,7 +109,11 @@ public class BinarySearchTree<dataType extends Comparable<? super dataType>> ext
             node = node.left;
       return node;
    }
-
+   /**
+    * 
+    * @param node
+    * @return
+    */
    public BinaryTreeNode<dataType> removeMin ( BinaryTreeNode<dataType> node )
    {
       if (node == null)
