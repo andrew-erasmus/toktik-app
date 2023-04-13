@@ -17,13 +17,10 @@ public class Main {
     public static void main(String[] args) {
 
         // DO TO
-        // Do a makefile
-        // A follow and follow back feature, delete posts, like counter, search for post
-        // Error handling if enter a string for the choice
-        // Enter a filename option
+        // delete posts, like counter, search for post, save videos to account after viewing??
         // FIX NUMBER OF LIKES AND ERROR HANDLING IF THEY ENTER A WORD AND NOT A NUMBER
 
-        int choice = 0;
+        String choice = "";
         // actions for the user to select from
         String menu = "Choose an action from the menu: (Choose 1-8)";
         menu += "\n1. Find the profile description for a given account";
@@ -35,49 +32,49 @@ public class Main {
         menu += "\n7. Load a file of actions from disk and process this";
         menu += "\n8. Quit\nEnter your choice: ";
 
-        while (choice != 8) {
+        while (choice != "8") {
             System.out.print(menu);
-            choice = input.nextInt();
+            choice = input.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     System.out.print("Enter the account name: ");
                     String targetName = input.next();
                     input.nextLine();
                     findDesc(targetName);
                     break;
 
-                case 2:
+                case "2":
                     System.out.println("\n-- Accounts --\n");
                     bst.inOrder();
                     break;
 
-                case 3:
+                case "3":
                     System.out.println("\n-- Create New Account --\n");
                     createAccount();
                     break;
 
-                case 4:
+                case "4":
                     System.out.println("\n-- Delete Account --\n");
                     deleteAccount();
                     break;
 
-                case 5:
+                case "5":
                     System.out.println("\n-- Posts --\n");
                     displayPosts();
                     break;
 
-                case 6:
+                case "6":
                     System.out.println("\n-- New Post --\n");
                     addPosts();
                     break;
 
-                case 7:
+                case "7":
                     // runs processes to do the actions in a file such as adding and deleting files
                     System.out.println("\n --Actions loaded from disk-- \n");
                     loadFileActions();
                     break;
-                case 8:
+                case "8":
                     System.out.println("\n-- Goodbye! --\n");
                     input.close();
                     break;
@@ -111,7 +108,7 @@ public class Main {
     }
 
     /**
-     * Method
+     * Method to create an account and add it to the binary tree based on user input.
      */
     public static void createAccount() {
         BinaryTreeNode<User> exists;

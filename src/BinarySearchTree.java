@@ -1,6 +1,6 @@
-// Hussein's Binary Search Tree
-// 27 March 2017
-// Hussein Suleman
+// Binary Search tree based on the work of Hussein Suleman's Binary Search Tree which was modified for this application's use. 
+// 10/04/2023
+// Andrew Erasmus
 
 public class BinarySearchTree<dataType extends Comparable<? super dataType>> extends BinaryTree<dataType>
 {

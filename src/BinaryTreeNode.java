@@ -1,6 +1,7 @@
-// Hussein's Binary Tree
-// 26 March 2017
-// Hussein Suleman
+// Binary Search tree based on the work of Hussein Suleman's Binary Tree which was modified for this application's use. 
+// 10/04/2023
+// Andrew Erasmus
+
 
 public class BinaryTreeNode<dataType>
 {

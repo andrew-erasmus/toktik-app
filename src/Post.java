@@ -51,7 +51,7 @@ public class Post {
      */
     public boolean equals(Post other){
 
-        if((this.title.equals(other.getTitle())) && (this.fileName.equals(other.getFName())) && (this.numLikes == (other.getLikes())) ){
+        if((this.title.equals(other.getTitle())) && (this.fileName.equals(other.getFName()))){
             return true;
         }
         return false;
