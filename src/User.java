@@ -68,8 +68,8 @@ public class User implements Comparable<User>{
         posts.outputPosts();
     }
 
-    public void findPost(){
-
+    public PostList getListOfPosts(){
+        return posts;
     }
 
     public void deletePost(){

@@ -98,19 +98,21 @@ public class PostList {
      * Method to find the a post in the user's list of post based on the filename.
      * Posts with the same name are different if they have different filenames
      * @param fileName the filename of the post being searched for.
+     * @return returns the post with a matching filename
      */
-    public void findPost(String fileName){
+    public Post findPost(String fileName){
         Node position = head;
         while (position != null){
-            if((!position.getPost().getFName().equals(fileName))){
-                System.out.println("\n--Result--\n");
-                System.out.println(position.getPost().toString());
-                return;
+            if((position.getPost().getFName().equalsIgnoreCase(fileName))){
+                //System.out.println(position.getPost().toString());
+                return position.getPost();
             }
             position = position.getLink();
         }
-
+        
         System.out.println("\n--Post does not exist--\n");
+        return null;
+        
 
     }
 

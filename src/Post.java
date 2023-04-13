@@ -66,6 +66,13 @@ public class Post {
         return output;
     }
 
+    /**
+     * Method to update the title of a post that a user chooses
+     * @param t
+     */
+    public void updateTitle(String t){
+        title = t;
+    }
     // add method to change title of a post
 
     ///

@@ -3,6 +3,9 @@
 // 11/04/2023
 // Main page for the backend of a simple tik tok clone
 import java.util.Scanner;
+
+import javax.annotation.processing.SupportedOptions;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -20,19 +23,34 @@ public class Main {
         // DO TO
         // delete posts, like counter, search for post, save videos to account after
         // viewing??
-        // FIX NUMBER OF LIKES AND ERROR HANDLING IF THEY ENTER A WORD AND NOT A NUMBER
+        // FIX NUMBER OF LIKES SO DONT ENTER A WORD
 
         String choice = "";
         // actions for the user to select from
-        String menu = "Choose an action from the menu: (Choose 1-8)";
+        String menu = "--------- Welcome to TokTik ---------\n";
+        menu += "Menu:\nChoose an action from the menu: (Choose 1-10)";
         menu += "\n1. Find the profile description for a given account";
         menu += "\n2. List all accounts";
         menu += "\n3. Create an account";
         menu += "\n4. Delete an account";
         menu += "\n5. Display all posts for a single account";
         menu += "\n6. Add a new post for an account";
-        menu += "\n7. Load a file of actions from disk and process this";
-        menu += "\n8. Quit\nEnter your choice: ";
+        menu += "\n7. Update title for a post";
+        menu += "\n8. Load a file of actions from disk and process this";
+        menu += "\n9. Help";
+        menu += "\n10. Quit\nEnter your choice: ";
+        // help menu to give users extra information
+        String help = "Help Menu:";
+        help += "\n1. Displays the description of any you account you enter if exists in the system";
+        help += "\n2. Lists all the accounts in the current system in alphabetical order";
+        help += "\n3. Creates an account and add it to the system. Provide a unique username and profile description";
+        help += "\n4. Deletes an account you enter from the syste, provided that the account exists";
+        help += "\n5. Displays all the posts for an account you enter in the order of most recent first, provided the account exists";
+        help += "\n6. Adds a new post to any account in the system, provided that the account exists";
+        help += "\n7. Loads actions from a disk to generate exisiting accounts and posts in the system. This file is named dataset.txt";
+        help += "\n8. Opens this help menu";
+        help += "\n9. Exits TokTik";
+        help += "Press \"X\" to return to menu: ";
 
         while (choice != "8") {
             System.out.print(menu);
@@ -69,17 +87,27 @@ public class Main {
                     break;
 
                 case "7":
+                    System.out.println("\n -- Update a Post Title --\n");
+                    changeTitle();
+                    break;
+                case "8":
                     // runs processes to do the actions in a file such as adding and deleting files
                     System.out.println("\n --Actions loaded from disk-- \n");
                     loadFileActions();
                     break;
-                case "8":
+                case "9":
+                    System.out.println("\n" + help);
+                    String decision = input.next();
+                    input.nextLine();
+                    if (decision.equalsIgnoreCase("X"))
+                        continue;
+                case "10":
                     System.out.println("\n-- Goodbye! --\n");
                     input.close();
                     break;
                 default:
                     // if the user does not enter a number from 1-8
-                    System.out.println("\n-- Please select a valid option (1-8) --\n");
+                    System.out.println("\n-- Please select a valid option (1-9) --\n");
                     break;
 
             }
@@ -321,8 +349,38 @@ public class Main {
         }
     }
 
-    public static void findPost() {
+    /**
+     * Method to change the title of a post for a certain account. 
+     * This is if the user's account exists and if the post entered also exists
+     */
+    public static void changeTitle() {
+        System.out.print("Enter the account to edit a post for (or \"back\" to return to menu): ");
+        String accName = input.next();
+        input.nextLine();
 
+        System.out.print("Enter the filename of the post to edit (or \"back\" to return to menu): ");
+        String file = input.next();
+        input.nextLine();
+
+        System.out.print("Enter the new post title (or \"back\" to return to menu): ");
+        String postTitle = input.next();
+        input.nextLine();
+        if (!accName.equalsIgnoreCase("back") || !file.equalsIgnoreCase("back")
+                || !postTitle.equalsIgnoreCase("back")) {
+            User poster = new User(accName, "");
+            BinaryTreeNode<User> toUpdate = bst.find(poster);
+
+            if (toUpdate != null) {
+                Post update = toUpdate.getData().getListOfPosts().findPost(file);
+                if (update != null) {
+                    update.updateTitle(postTitle);
+                } else {
+                    System.out.println("\n-- Post could not be found, cannot update -- \n");
+                }
+            } else {
+                System.out.println("\n -- Account not found, cannot update post --\n");
+            }
+        }
     }
 
 }
