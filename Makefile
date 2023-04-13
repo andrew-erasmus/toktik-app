@@ -2,8 +2,8 @@
 # Makefile for the tok tik application
 # 12/04/2023
 
-JAVAC=bin/javac
-JAVA=bin/java
+JAVAC=/usr/bin/javac
+JAVA=/usr/bin/java
 
 .SUFFIXES: .java .class
 SRCDIR=src 
@@ -12,15 +12,7 @@ BINDIR=bin
 $(BINDIR)/%.class:$(SRCDIR)/%.java
 	$(JAVAC) -d $(BINDIR)/ -cp $(BINDIR) $<
 
-CLASSES=BinaryTreeNode.class \
-		BinaryTree.class \
-		BTQueueNode.class \
-		BTQueue.class \
-        BinarySearchTree.class \
-		Post.class \
-		PostList.class \
-		User.class \
-		Main.class
+CLASSES=BinaryTreeNode.class BinaryTree.class BinarySearchTree.class Post.class PostList.class User.class Main.class
 		 
 
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)

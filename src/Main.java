@@ -18,9 +18,10 @@ public class Main {
 
         // DO TO
         // Do a makefile
-        // Make a simple GUI, or a follow and follow back feature, delete posts, search
-        // Error handling to go back
+        // A follow and follow back feature, delete posts, like counter, search for post
         // Error handling if enter a string for the choice
+        // Enter a filename option
+        // FIX NUMBER OF LIKES AND ERROR HANDLING IF THEY ENTER A WORD AND NOT A NUMBER
 
         int choice = 0;
         // actions for the user to select from
@@ -77,7 +78,7 @@ public class Main {
                     loadFileActions();
                     break;
                 case 8:
-                    System.out.println("-- Goodbye! --");
+                    System.out.println("\n-- Goodbye! --\n");
                     input.close();
                     break;
                 default:
@@ -104,16 +105,13 @@ public class Main {
         if (found == null) {
             System.out.println("\n-- Account entered does not exist --\n");
         }else{
-            System.out.println("\nProfile Desription: " + found.data.getDesc() + "\n");
+            System.out.println("\nProfile Desription: " + found.getData().getDesc() + "\n");
         }
        
     }
 
     /**
-     * Method to create an account with an inputted name and description
-     * If the name of the user already exists, it will make the user try again until they 
-     * choose a unique name if they so choose. 
-     * 
+     * Method
      */
     public static void createAccount() {
         BinaryTreeNode<User> exists;
@@ -161,7 +159,6 @@ public class Main {
     /**
      * Deletes an account based on the username that the user enters.
      * If it is not found, the user can try again if they wish
-     * 
      */
     public static void deleteAccount() {
         BinaryTreeNode<User> foundToDelete;
@@ -206,7 +203,7 @@ public class Main {
         if (foundForPosts == null) {
             System.out.println("\n-- Account cannot be found --\n");
         } else {
-            foundForPosts.data.getPosts();
+            foundForPosts.getData().getPosts();
         }
 
     }
@@ -228,11 +225,11 @@ public class Main {
             String postTitle = input.nextLine();
             System.out.print("File name: ");
             String fileName = input.nextLine();
-            System.out.println("Number of likes: ");
+            System.out.print("Number of likes: ");
             int numLikes = input.nextInt();
             Post inPost = new Post(postTitle, fileName, numLikes);
 
-            toPost.data.addPost(inPost);
+            toPost.getData().addPost(inPost);
         } else {
             System.out.println("\n-- Account cannot be found, cannot make a post --\n");
         }
@@ -253,7 +250,7 @@ public class Main {
 
         // find the post account and then add to it
         Post inPost = new Post(postTitle, fileName, numLikes);
-        toPost.data.addPost(inPost);
+        toPost.getData().addPost(inPost);
     }
 
     /**
