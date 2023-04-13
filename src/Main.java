@@ -1,3 +1,4 @@
+
 // Andrew Erasmus
 // 11/04/2023
 // Main page for the backend of a simple tik tok clone
@@ -17,7 +18,8 @@ public class Main {
     public static void main(String[] args) {
 
         // DO TO
-        // delete posts, like counter, search for post, save videos to account after viewing??
+        // delete posts, like counter, search for post, save videos to account after
+        // viewing??
         // FIX NUMBER OF LIKES AND ERROR HANDLING IF THEY ENTER A WORD AND NOT A NUMBER
 
         String choice = "";
@@ -38,10 +40,7 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter the account name: ");
-                    String targetName = input.next();
-                    input.nextLine();
-                    findDesc(targetName);
+                    findDesc();
                     break;
 
                 case "2":
@@ -89,47 +88,57 @@ public class Main {
     }
 
     /**
-     * Finds the description of a given account by passing in username to search in the
+     * Finds the description of a given account by passing in username to search in
+     * the
      * tree and by outputting the description of it.
-     * If the username is not found in the binary tree then it will output that it 
+     * If the username is not found in the binary tree then it will output that it
      * does not exist.
      * 
      * @param targetName The name of the user to search in the binary tree
      */
-    public static void findDesc(String targetName) {
-        User temp = new User(targetName, "");
-        BinaryTreeNode<User> found = bst.find(temp);
-        if (found == null) {
-            System.out.println("\n-- Account entered does not exist --\n");
-        }else{
-            System.out.println("\nProfile Desription: " + found.getData().getDesc() + "\n");
+    public static void findDesc() {
+        System.out.print("Enter the account name (or \"back\" to return to menu): ");
+        String targetName = input.next();
+        input.nextLine();
+        if (!targetName.equalsIgnoreCase("back")) {
+            User temp = new User(targetName, "");
+            BinaryTreeNode<User> found = bst.find(temp);
+            if (found == null) {
+                System.out.println("\n-- Account entered does not exist --\n");
+            } else {
+                System.out.println("\nProfile Desription: " + found.getData().getDesc() + "\n");
+            }
         }
-       
     }
 
     /**
-     * Method to create an account and add it to the binary tree based on user input.
+     * Method to create an account and add it to the binary tree based on user
+     * input.
      */
     public static void createAccount() {
         BinaryTreeNode<User> exists;
         do {
-            System.out.print("Enter an account name: ");
+            System.out.print("Enter an account name (or \"back\" to return to menu): ");
             String accName = input.next();
             input.nextLine();
-            System.out.print("Enter an account description: ");
+            System.out.print("Enter an account description (or \"back\" to return to menu): ");
             String desc = input.nextLine();
 
+            if (accName.equalsIgnoreCase("back") || desc.equalsIgnoreCase("back")) {
+                break;
+            }
             User inAcc = new User(accName, desc);
             exists = bst.find(inAcc);
 
             if (exists != null) {
                 System.out.println("Account name already exists, please try again");
-                System.out.println("Do you want to continue? Y/N"); // Allows them to quit if they don't want to continue
+                System.out.println("Do you want to continue? Y/N"); // Allows them to quit if they don't want to
+                                                                    // continue
                 String cont = input.nextLine();
-                
-                if(cont.equals("Y") || cont.equals("y")){
+
+                if (cont.equals("Y") || cont.equals("y")) {
                     continue;
-                }else{
+                } else {
                     break;
                 }
             } else {
@@ -137,18 +146,19 @@ public class Main {
                 System.out.println("\n-- New Account Created --\n");
             }
         } while (exists != null);
+
     }
 
     /**
      * Method to create an account based on the actions loaded from a file.
      * 
      * @param accName The name of the user to be added to the tree
-     * @param desc The description of the respective account entered
+     * @param desc    The description of the respective account entered
      */
     public static void createAccount(String accName, String desc) {
-        //BinaryTreeNode<User> exists;
+        // BinaryTreeNode<User> exists;
         User inAcc = new User(accName, desc);
-        //exists = bst.find(inAcc);
+        // exists = bst.find(inAcc);
         bst.insert(inAcc);
 
     }
@@ -160,10 +170,13 @@ public class Main {
     public static void deleteAccount() {
         BinaryTreeNode<User> foundToDelete;
         do {
-            System.out.print("Enter account to delete: ");
+            System.out.print("Enter account to delete (or \"back\" to return to menu): ");
             String deleteName = input.next();
             input.nextLine();
 
+            if (deleteName.equalsIgnoreCase("back")) {
+                break;
+            }
             // Create a new user with the name to search for
             User deleteUser = new User(deleteName, "");
             // See if an object with the same name can be found
@@ -173,10 +186,10 @@ public class Main {
                 System.out.println("\n-- Account name does not exist, please try again --\n");
                 System.out.println("Do you want to continue? Y/N");
                 String cont = input.nextLine();
-                
-                if(cont.equals("Y") || cont.equals("y")){
+
+                if (cont.equals("Y") || cont.equals("y")) {
                     continue;
-                }else{
+                } else {
                     break;
                 }
             } else {
@@ -190,56 +203,61 @@ public class Main {
      * Displays all the posts for a single user if the account exists
      */
     public static void displayPosts() {
-        System.out.print("Enter the account name: ");
+        System.out.print("Enter the account name (or \"back\" to return to menu): ");
         String postsName = input.next();
         input.nextLine();
         // create a target object with the same name and have it return a node with the
         // correct user object
-        User target = new User(postsName, "");
-        BinaryTreeNode<User> foundForPosts = bst.find(target);
-        if (foundForPosts == null) {
-            System.out.println("\n-- Account cannot be found --\n");
-        } else {
-            foundForPosts.getData().getPosts();
+        if (!postsName.equalsIgnoreCase("back")) {
+            User target = new User(postsName, "");
+            BinaryTreeNode<User> foundForPosts = bst.find(target);
+            if (foundForPosts == null) {
+                System.out.println("\n-- Account cannot be found --\n");
+            } else {
+                foundForPosts.getData().getPosts();
+            }
         }
 
     }
 
     /**
-     * Asks the user to enter a title, filename and number of likes. 
-     * It then creates a post object and adds it to the linked list belonging to a user
+     * Asks the user to enter a title, filename and number of likes.
+     * It then creates a post object and adds it to the linked list belonging to a
+     * user
      */
     public static void addPosts() {
-        System.out.print("Enter the account to add a post to: ");
+        System.out.print("Enter the account to add a post to (or \"back\" to return to menu): ");
         String postAcc = input.next();
         input.nextLine();
 
-        User poster = new User(postAcc, "");
-        BinaryTreeNode<User> toPost = bst.find(poster);
+        if (!postAcc.equalsIgnoreCase("back")) {
+            User poster = new User(postAcc, "");
+            BinaryTreeNode<User> toPost = bst.find(poster);
 
-        if (toPost != null) {
-            System.out.print("Title: ");
-            String postTitle = input.nextLine();
-            System.out.print("File name: ");
-            String fileName = input.nextLine();
-            System.out.print("Number of likes: ");
-            int numLikes = input.nextInt();
-            Post inPost = new Post(postTitle, fileName, numLikes);
+            if (toPost != null) {
+                System.out.print("Title: ");
+                String postTitle = input.nextLine();
+                System.out.print("File name: ");
+                String fileName = input.nextLine();
+                System.out.print("Number of likes: ");
+                int numLikes = input.nextInt();
+                Post inPost = new Post(postTitle, fileName, numLikes);
 
-            toPost.getData().addPost(inPost);
-        } else {
-            System.out.println("\n-- Account cannot be found, cannot make a post --\n");
+                toPost.getData().addPost(inPost);
+            } else {
+                System.out.println("\n-- Account cannot be found, cannot make a post --\n");
+            }
         }
-        
 
     }
 
     /**
      * Adds posts to the account of a user based off the actions from a file
-     * @param postAcc The account to add the post to
+     * 
+     * @param postAcc   The account to add the post to
      * @param postTitle The title of the post to be added
-     * @param numLikes The number of likes for the post
-     * @param fileName The fileName of the post
+     * @param numLikes  The number of likes for the post
+     * @param fileName  The fileName of the post
      */
     public static void addPosts(String postAcc, String postTitle, int numLikes, String fileName) {
         User poster = new User(postAcc, "");
@@ -252,6 +270,7 @@ public class Main {
 
     /**
      * Loads actions from an external file to create and add a file
+     * 
      * @throws e If the file cannot be found it throws this exception
      */
     public static void loadFileActions() {
@@ -268,7 +287,20 @@ public class Main {
                     int createLength = splitLine[0].length(); // length of the word "create"
                     int nameLength = splitLine[1].length(); // length of the username
                     int spaces = 2;
-                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length())); //substring for the description from after the word to the end of the line
+                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length())); // substring
+                                                                                                                    // for
+                                                                                                                    // the
+                                                                                                                    // description
+                                                                                                                    // from
+                                                                                                                    // after
+                                                                                                                    // the
+                                                                                                                    // word
+                                                                                                                    // to
+                                                                                                                    // the
+                                                                                                                    // end
+                                                                                                                    // of
+                                                                                                                    // the
+                                                                                                                    // line
                 } else {
                     int addLength = splitLine[0].length(); // length of the word "add"
                     int nameLength = splitLine[1].length(); // length of the username
@@ -277,21 +309,20 @@ public class Main {
                     int spaces = 4;
                     addPosts(splitLine[1],
                             line.substring(addLength + nameLength + fileNameLength + numLikesLength + spaces,
-                                    line.length()), 
-                            Integer.parseInt(splitLine[3]), splitLine[2]); // adds the post with the respective files and uses substring to account for spaces
+                                    line.length()),
+                            Integer.parseInt(splitLine[3]), splitLine[2]); // adds the post with the respective files
+                                                                           // and uses substring to account for spaces
                 }
 
             }
         } catch (FileNotFoundException e) {
-            // TODO: handle exception
             System.out.println("System could not find the file");
             System.exit(0);
         }
     }
 
+    public static void findPost() {
 
-    public static void findPost(){
-        
     }
 
 }
