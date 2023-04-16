@@ -17,10 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // DO TO
-        // delete posts, like counter, search for post, save videos to account after
-        // viewing??
-        // FIX NUMBER OF LIKES SO DONT ENTER A WORD
+    
 
         String choice = "";
         // actions for the user to select from
@@ -274,15 +271,20 @@ public class Main {
                 String fileName = input.next();
                 input.nextLine();
                 System.out.print("Number of likes: ");
-                int numLikes = input.nextInt();
+                String inLikes = input.next();
                 input.nextLine();
-                // if(numLikes.isDigit()){
+                if(!inLikes.matches("\\d+")){
+                    System.out.println("\n--Please enter a number for the number of likes--\n");
+                    
+                }else{
+                    int numLikes = Integer.parseInt(inLikes);
 
-                // }
-                Post inPost = new Post(postTitle, fileName, numLikes);
+                    
+                    Post inPost = new Post(postTitle, fileName, numLikes);
 
-                toPost.getData().addPost(inPost);
-                System.out.println("\n-- Post Added --\n");
+                    toPost.getData().addPost(inPost);
+                    System.out.println("\n-- Post Added --\n");
+                }   
             } else {
                 System.out.println("\n-- Account cannot be found, cannot make a post --\n");
             }
