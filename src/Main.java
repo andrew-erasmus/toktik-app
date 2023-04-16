@@ -3,9 +3,6 @@
 // 11/04/2023
 // Main page for the backend of a simple tik tok clone
 import java.util.Scanner;
-
-import javax.annotation.processing.SupportedOptions;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -36,9 +33,10 @@ public class Main {
         menu += "\n5. Display all posts for a single account";
         menu += "\n6. Add a new post for an account";
         menu += "\n7. Update title for a post";
-        menu += "\n8. Load a file of actions from disk and process this";
-        menu += "\n9. Help";
-        menu += "\n10. Quit\nEnter your choice: ";
+        menu += "\n8. Find a post";
+        menu += "\n9. Load a file of actions from disk and process this";
+        menu += "\n10. Help";
+        menu += "\n11. Quit\nEnter your choice: ";
         // help menu to give users extra information
         String help = "Help Menu:";
         help += "\n1. Displays the description of any you account you enter if exists in the system";
@@ -47,9 +45,11 @@ public class Main {
         help += "\n4. Deletes an account you enter from the syste, provided that the account exists";
         help += "\n5. Displays all the posts for an account you enter in the order of most recent first, provided the account exists";
         help += "\n6. Adds a new post to any account in the system, provided that the account exists";
-        help += "\n7. Loads actions from a disk to generate exisiting accounts and posts in the system. This file is named dataset.txt";
-        help += "\n8. Opens this help menu";
-        help += "\n9. Exits TokTik";
+        help += "\n7. Updates the title of any post for a user's account, given that the account and post exist";
+        help+="\n8. Finds and outputs a post of any user based on the post's filename, given that the account and post both exist";
+        help += "\n9. Loads actions from a disk to generate exisiting accounts and posts in the system. This file is named dataset.txt";
+        help += "\n10. Opens this help menu";
+        help += "\n11. Exits TokTik";
         help += "Press \"X\" to return to menu: ";
 
         while (choice != "8") {
@@ -90,24 +90,28 @@ public class Main {
                     System.out.println("\n -- Update a Post Title --\n");
                     changeTitle();
                     break;
+
                 case "8":
-                    // runs processes to do the actions in a file such as adding and deleting files
-                    System.out.println("\n --Actions loaded from disk-- \n");
-                    loadFileActions();
+                    findPost();
                     break;
                 case "9":
+                    // runs processes to do the actions in a file such as adding and deleting files
+                    loadFileActions();
+                    break;
+                case "10":
                     System.out.println("\n" + help);
                     String decision = input.next();
                     input.nextLine();
                     if (decision.equalsIgnoreCase("X"))
                         continue;
-                case "10":
+                case "11":
                     System.out.println("\n-- Goodbye! --\n");
                     input.close();
+                    System.exit(0);
                     break;
                 default:
                     // if the user does not enter a number from 1-8
-                    System.out.println("\n-- Please select a valid option (1-9) --\n");
+                    System.out.println("\n-- Please select a valid option (1-11) --\n");
                     break;
 
             }
@@ -264,14 +268,21 @@ public class Main {
 
             if (toPost != null) {
                 System.out.print("Title: ");
-                String postTitle = input.nextLine();
+                String postTitle = input.next();
+                input.nextLine();
                 System.out.print("File name: ");
-                String fileName = input.nextLine();
+                String fileName = input.next();
+                input.nextLine();
                 System.out.print("Number of likes: ");
                 int numLikes = input.nextInt();
+                input.nextLine();
+                // if(numLikes.isDigit()){
+
+                // }
                 Post inPost = new Post(postTitle, fileName, numLikes);
 
                 toPost.getData().addPost(inPost);
+                System.out.println("\n-- Post Added --\n");
             } else {
                 System.out.println("\n-- Account cannot be found, cannot make a post --\n");
             }
@@ -305,52 +316,50 @@ public class Main {
         // create logic to add accounts from file for add and remove
         Scanner fileIn = null;
         try {
-            fileIn = new Scanner(new FileInputStream("dataset.txt"));
+            System.out.print("Please enter a filename to load (or \"back\" to return to menu): ");
+            String fileName = input.next();
+            input.nextLine();
 
-            while (fileIn.hasNext()) {
-                String line = fileIn.nextLine();
-                String[] splitLine = line.split(" ");
+            if (!fileName.equalsIgnoreCase("back")) {
 
-                if (splitLine[0].equalsIgnoreCase("Create")) {
-                    int createLength = splitLine[0].length(); // length of the word "create"
-                    int nameLength = splitLine[1].length(); // length of the username
-                    int spaces = 2;
-                    createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length())); // substring
-                                                                                                                    // for
-                                                                                                                    // the
-                                                                                                                    // description
-                                                                                                                    // from
-                                                                                                                    // after
-                                                                                                                    // the
-                                                                                                                    // word
-                                                                                                                    // to
-                                                                                                                    // the
-                                                                                                                    // end
-                                                                                                                    // of
-                                                                                                                    // the
-                                                                                                                    // line
-                } else {
-                    int addLength = splitLine[0].length(); // length of the word "add"
-                    int nameLength = splitLine[1].length(); // length of the username
-                    int fileNameLength = splitLine[2].length(); // length of the filename
-                    int numLikesLength = splitLine[3].length(); // length of the number of likes as a string
-                    int spaces = 4;
-                    addPosts(splitLine[1],
-                            line.substring(addLength + nameLength + fileNameLength + numLikesLength + spaces,
-                                    line.length()),
-                            Integer.parseInt(splitLine[3]), splitLine[2]); // adds the post with the respective files
-                                                                           // and uses substring to account for spaces
+                fileIn = new Scanner(new FileInputStream(fileName));
+
+                while (fileIn.hasNext()) {
+                    String line = fileIn.nextLine();
+                    String[] splitLine = line.split(" ");
+
+                    if (splitLine[0].equalsIgnoreCase("Create")) {
+                        int createLength = splitLine[0].length(); // length of the word "create"
+                        int nameLength = splitLine[1].length(); // length of the username
+                        int spaces = 2;
+                        // substring for the description from after the word to the end of the line
+                        createAccount(splitLine[1], line.substring(nameLength + createLength + spaces, line.length()));
+
+                    } else {
+                        int addLength = splitLine[0].length(); // length of the word "add"
+                        int nameLength = splitLine[1].length(); // length of the username
+                        int fileNameLength = splitLine[2].length(); // length of the filename
+                        int numLikesLength = splitLine[3].length(); // length of the number of likes as a string
+                        int spaces = 4;
+                        addPosts(splitLine[1],
+                                line.substring(addLength + nameLength + fileNameLength + numLikesLength + spaces,
+                                        line.length()),
+                                Integer.parseInt(splitLine[3]), splitLine[2]); // adds the post with the respective
+                                                                               // files
+                                                                               // and uses substring to account for
+                                                                               // spaces
+                    }
+
                 }
-
+                System.out.println("\n --Actions loaded from disk-- \n");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("System could not find the file");
-            System.exit(0);
+            System.out.println("\n--System could not find the file--\n");
         }
     }
 
     /**
-     * Method to change the title of a post for a certain account. 
+     * Method to change the title of a post for a certain account.
      * This is if the user's account exists and if the post entered also exists
      */
     public static void changeTitle() {
@@ -381,6 +390,35 @@ public class Main {
                 System.out.println("\n -- Account not found, cannot update post --\n");
             }
         }
+    }
+
+    /**
+     * Method that finds a post based off the filename.
+     * If the post does not exist, gives the user an appropriate error message
+     */
+    public static void findPost() {
+        System.out.print("Enter the account to edit a post for (or \"back\" to return to menu): ");
+        String accName = input.next();
+        input.nextLine();
+
+        System.out.print("Enter the filename of the post to find (or \"back\" to return to menu): ");
+        String file = input.next();
+        input.nextLine();
+
+        if (!accName.equalsIgnoreCase("back") || !!file.equalsIgnoreCase("back")) {
+            User poster = new User(accName, "");
+            BinaryTreeNode<User> toUpdate = bst.find(poster);
+
+            if (toUpdate != null) {
+                Post found = toUpdate.getData().getListOfPosts().findPost(file);
+                if (found != null) {
+                    System.out.println(found.toString());
+                } else {
+                    System.out.println("\n-- Post could not be found -- \n");
+                }
+            }
+        }
+
     }
 
 }

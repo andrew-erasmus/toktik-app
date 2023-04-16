@@ -17,7 +17,6 @@ CLASSES=BinaryTreeNode.class BinaryTree.class BinarySearchTree.class Post.class 
 
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/%.class)
 default: $(CLASS_FILES)
-		
 clean:
 	rm $(BINDIR)/*.class
 
