@@ -15,6 +15,10 @@ public class Main {
     static BinarySearchTree<User> bst = new BinarySearchTree<User>();
     static Scanner input = new Scanner(System.in);
 
+    /**
+     * Main method for the application, will allow user to run all processes
+     * @param args The user input to the terminal
+     */
     public static void main(String[] args) {
 
     
@@ -49,7 +53,7 @@ public class Main {
         help += "\n11. Exits TokTik";
         help += "Press \"X\" to return to menu: ";
 
-        while (choice != "8") {
+        while (choice != "11") {
             System.out.print(menu);
             choice = input.nextLine();
 
