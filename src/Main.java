@@ -103,8 +103,12 @@ public class Main {
                     System.out.println("\n" + help);
                     String decision = input.next();
                     input.nextLine();
-                    if (decision.equalsIgnoreCase("X"))
-                        continue;
+                    do{
+                        System.out.println("\n--Error: Only press X to return to menu--\n");
+                        decision = input.next();
+                        input.nextLine();
+                    }while(!decision.equalsIgnoreCase("X"));
+                        
                 case "11":
                     System.out.println("\n-- Goodbye! --\n");
                     input.close();
@@ -423,7 +427,7 @@ public class Main {
                     System.out.println("\n-- Results --\n");
                     System.out.println(found.toString());
                 } else {
-                    System.out.println("\n-- Post could not be found -- \n");
+                    System.out.println("\n--Post could not be found-- \n");
                 }
             }
         }
