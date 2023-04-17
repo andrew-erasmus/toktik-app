@@ -51,7 +51,7 @@ public class Main {
         help += "\n9. Loads actions from a disk to generate exisiting accounts and posts in the system. This file is named dataset.txt";
         help += "\n10. Opens this help menu";
         help += "\n11. Exits TokTik";
-        help += "Press \"X\" to return to menu: ";
+        help += "\nPress \"X\" to return to menu: ";
 
         while (choice != "11") {
             System.out.print(menu);
@@ -269,14 +269,14 @@ public class Main {
 
             if (toPost != null) {
                 System.out.print("Title: ");
-                String postTitle = input.next();
-                input.nextLine();
+                String postTitle = input.nextLine();
                 System.out.print("File name: ");
                 String fileName = input.next();
                 input.nextLine();
                 System.out.print("Number of likes: ");
                 String inLikes = input.next();
                 input.nextLine();
+                //checks if the number entered is an integer or not
                 if(!inLikes.matches("\\d+")){
                     System.out.println("\n--Please enter a number for the number of likes--\n");
                     
@@ -378,8 +378,8 @@ public class Main {
         input.nextLine();
 
         System.out.print("Enter the new post title (or \"back\" to return to menu): ");
-        String postTitle = input.next();
-        input.nextLine();
+        String postTitle = input.nextLine();
+        
         if (!accName.equalsIgnoreCase("back") || !file.equalsIgnoreCase("back")
                 || !postTitle.equalsIgnoreCase("back")) {
             User poster = new User(accName, "");
@@ -389,6 +389,7 @@ public class Main {
                 Post update = toUpdate.getData().getListOfPosts().findPost(file);
                 if (update != null) {
                     update.updateTitle(postTitle);
+                    System.out.println("\n--Post Updated--\n");
                 } else {
                     System.out.println("\n-- Post could not be found, cannot update -- \n");
                 }
@@ -403,7 +404,8 @@ public class Main {
      * If the post does not exist, gives the user an appropriate error message
      */
     public static void findPost() {
-        System.out.print("Enter the account to edit a post for (or \"back\" to return to menu): ");
+        System.out.print("\n-- Find a post--\n");
+        System.out.print("Enter the account to find a post for (or \"back\" to return to menu): ");
         String accName = input.next();
         input.nextLine();
 
@@ -418,6 +420,7 @@ public class Main {
             if (toUpdate != null) {
                 Post found = toUpdate.getData().getListOfPosts().findPost(file);
                 if (found != null) {
+                    System.out.println("\n-- Results --\n");
                     System.out.println(found.toString());
                 } else {
                     System.out.println("\n-- Post could not be found -- \n");
