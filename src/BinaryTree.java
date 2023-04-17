@@ -15,26 +15,6 @@ public class BinaryTree<dataType>
       root = null;
    }
    
-   // /**
-   //  * 
-   //  * @return
-   //  */
-   // public int getHeight ()
-   // {
-   //    return getHeight (root);
-   // }  
-   // /**
-   //  * 
-   //  * @param node
-   //  * @return
-   //  */ 
-   // public int getHeight ( BinaryTreeNode<dataType> node )
-   // {
-   //    if (node == null)
-   //       return -1;
-   //    else
-   //       return 1 + Math.max (getHeight (node.getLeft ()), getHeight (node.getRight ()));
-   // }
 
 
    /**

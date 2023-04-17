@@ -68,12 +68,11 @@ public class User implements Comparable<User>{
         posts.outputPosts();
     }
 
+    /*
+     * Returns the list of posts associated with a user
+     */
     public PostList getListOfPosts(){
         return posts;
-    }
-
-    public void deletePost(){
-        
     }
     
    

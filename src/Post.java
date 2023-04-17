@@ -73,7 +73,4 @@ public class Post {
     public void updateTitle(String t){
         title = t;
     }
-    // add method to change title of a post
-
-    ///
 }
