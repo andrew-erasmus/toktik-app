@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
  * This method runs the main operations of the application where the user can
  * select options to manipulate data in a certain way
  */
-public class Main {
+public class TokTik {
 
     static BinarySearchTree<User> bst = new BinarySearchTree<User>();
     static Scanner input = new Scanner(System.in);
